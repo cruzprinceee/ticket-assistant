@@ -3,11 +3,11 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import streamlit as st
 
 # Path to the model inside the repo
-model_path = os.path.join(os.path.dirname(__file__), "model")
+model_path = '/content/drive/MyDrive/customer_support_bot/'
 
 # Load the model and tokenizer
-model = AutoModelForCausalLM.from_pretrained(model_path)
-tokenizer = AutoTokenizer.from_pretrained(model_path)
+model = AutoModelForCausalLM.from_pretrained(model_path, local_files_only=True)
+tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
 
 tokenizer.pad_token = tokenizer.eos_token
 model.resize_token_embeddings(len(tokenizer))
