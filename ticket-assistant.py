@@ -6,7 +6,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 model_path = '/content/drive/MyDrive/customer_support_bot'  
 
 # Load the model and tokenizer from Google Drive
-model = AutoModelForCausalLM.from_pretrained(model_path)
+model = AutoModelForCausalLM.from_pretrained(model_path, revision="main")
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 
 tokenizer.pad_token = tokenizer.eos_token
