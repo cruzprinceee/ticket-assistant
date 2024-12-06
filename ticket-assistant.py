@@ -5,9 +5,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 # Path to model files in Google Drive
 model_path = '/content/drive/MyDrive/customer_support_bot'  
 
-# Load the model and tokenizer from Google Drive
-model = AutoModelForCausalLM.from_pretrained(model_path, revision="main")
-tokenizer = AutoTokenizer.from_pretrained(model_path)
+# Load the model and tokenizer 
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+
 
 tokenizer.pad_token = tokenizer.eos_token
 model.resize_token_embeddings(len(tokenizer))
