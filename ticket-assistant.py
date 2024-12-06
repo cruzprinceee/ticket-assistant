@@ -1,9 +1,13 @@
 import streamlit as st
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
-# Load the model and tokenizer
-model_name = "gpt2"
-model = GPT2LMHeadModel.from_pretrained(model_name)
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+# Path to model files in Google Drive
+model_path = '/content/drive/MyDrive/customer_support_bot'  
+
+# Load the model and tokenizer from Google Drive
+model = GPT2LMHeadModel.from_pretrained(model_path)
+tokenizer = GPT2Tokenizer.from_pretrained(model_path)
+
 tokenizer.pad_token = tokenizer.eos_token
 model.resize_token_embeddings(len(tokenizer))
 
