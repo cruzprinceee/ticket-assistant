@@ -1,14 +1,13 @@
-import streamlit as st
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import os
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import streamlit as st
 
-# Path to model files in Google Drive
-model_path = '/content/drive/MyDrive/customer_support_bot'  
+# Path to the model inside the repo
+model_path = os.path.join(os.path.dirname(__file__), "model")
 
-# Load the model and tokenizer 
-model = GPT2LMHeadModel.from_pretrained('gpt2')
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-
+# Load the model and tokenizer
+model = AutoModelForCausalLM.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained(model_path)
 
 tokenizer.pad_token = tokenizer.eos_token
 model.resize_token_embeddings(len(tokenizer))
@@ -19,7 +18,6 @@ def predict(ticket_description):
     outputs = model.generate(**inputs, max_length=50, num_return_sequences=1)
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return response
-
 
 # Streamlit UI
 st.title("Customer Support Ticket Assistant Bot")
